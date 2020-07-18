@@ -20,23 +20,21 @@ def mmToPixels(mm):
 
 # Setter viktige variabler:
 
-width_px = settings["ark_bredde"]
-height_px = settings["ark_hoyde"]
 dpi = settings["ark_dpi"]
+width_px = mmToPixels(settings["ark_bredde_i_mm"])
+height_px = mmToPixels(settings["ark_hoyde_i_mm"])
 
 paper_margin_px = mmToPixels(settings["rutenett_marg_i_mm"])
 inner_width_px = width_px - 2 * paper_margin_px
 inner_height_px = height_px - 2 * paper_margin_px
 
 dots_distance_px = mmToPixels(settings["prikker_avstand_i_mm"])
-dots_radius_px = mmToPixels(settings["prikker_radius_i_mm"])
-dots_diameter_px = dots_radius_px // 2
+dots_diameter_px = mmToPixels(settings["prikker_diameter_i_mm"])
 
 array_nr_of_dots_x = inner_width_px // dots_distance_px + 1
 array_nr_of_dots_y = inner_height_px // dots_distance_px + 1
 
 if settings["rutenett_sentrert"]:
-	print((inner_width_px - ((array_nr_of_dots_x - 1) * dots_distance_px)) // 2)
 	array_x0_px = paper_margin_px + (inner_width_px - ((array_nr_of_dots_x - 1) * dots_distance_px)) // 2
 	array_y0_px = paper_margin_px + (inner_height_px - ((array_nr_of_dots_y - 1) * dots_distance_px)) // 2
 else:
@@ -52,33 +50,27 @@ img = np.full((height_px, width_px, 1), 255, np.uint8)
 
 
 
-
 # Tegner prikkene i rutenettet:
-print("Jaa  ", paper_margin_px)
-print("Hmmmm", inner_width_px, inner_height_px, dots_distance_px, dots_distance_px)
-print("Halla", array_nr_of_dots_x, array_nr_of_dots_y)
 for i in range(array_nr_of_dots_x):
 	for j in range(array_nr_of_dots_y):
 		cv2.circle(img, (array_x0_px + i * dots_distance_px, array_y0_px + j * dots_distance_px), 0, (0), dots_diameter_px)
-
-
-# cv2.circle(img, (array_nr_of_dots_x + 7 * dots_distance_px, array_nr_of_dots_y + 11 * ), 30, (0), 10)
 
 
 
 
 # Lagrer bildet som png:
 
-cv2.imwrite("prikker.png", img)
+cv2.imwrite(settings["filbane_png"], img)
 
 
 
 
 # Lagrer bildet som pdf:
 
-image1 = Image.open(r"prikker.png")
+image1 = Image.open(settings["filbane_png"])
 im1 = image1.convert("RGB")
-im1.save(r"prikker.pdf", resolution=dpi)
+im1.save(settings["filbane_pdf"], format="PDF", resolution=dpi)
+print(f"Lagret prikkefil som {settings['filbane_pdf']}")
 
 
 

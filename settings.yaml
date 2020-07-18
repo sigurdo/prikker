@@ -1,6 +1,7 @@
-# Disse verdiene forteller at det er et A4-ark
-ark_bredde: 2480
-ark_hoyde: 3508
+# Disse verdiene beskriver størrelse og oppløsning på arket:
+# Default verdier er satt til A4
+ark_bredde_i_mm: 210
+ark_hoyde_i_mm: 297
 ark_dpi: 300
 
 # Disse verdiene beskriver plassering av rutenettet:
@@ -9,4 +10,8 @@ rutenett_sentrert: True
 
 # Disse verdiene beskriver selve prikkene:
 prikker_avstand_i_mm: 20
-prikker_radius_i_mm: 1
+prikker_diameter_i_mm: 0.5
+
+# Disse verdiene bestemmer hvor prikkefila blir lagra:
+filbane_png: "prikker.png"
+filbane_pdf: "prikker.pdf"
