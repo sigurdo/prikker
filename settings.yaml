@@ -1,0 +1,12 @@
+# Disse verdiene forteller at det er et A4-ark
+ark_bredde: 2480
+ark_hoyde: 3508
+ark_dpi: 300
+
+# Disse verdiene beskriver plassering av rutenettet:
+rutenett_marg_i_mm: 10
+rutenett_sentrert: True
+
+# Disse verdiene beskriver selve prikkene:
+prikker_avstand_i_mm: 20
+prikker_radius_i_mm: 1
